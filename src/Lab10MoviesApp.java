@@ -29,14 +29,14 @@ public class Lab10MoviesApp {
 		}
 		getCategories(moviesList);
 	}
-	private static void chooseMovie(Scanner sc, List<Movie> moviesList, HashSet<String> categories) {
+	private static void chooseCategory(Scanner sc, List<Movie> moviesList, HashSet<String> categories) {
 		System.out.println("Which movie category are you interested in? (Scifi, Action, Drama, Comedy): ");
 		String answer = sc.nextLine();
 		displayMovies(sc, moviesList, categories, answer);
 		System.out.println("Would you like to continue? (yes/no): ");
 		String userContinue = sc.nextLine();
 		if (userContinue.equals("yes")) {
-			chooseMovie(sc, moviesList, categories);
+			chooseCategory(sc, moviesList, categories);
 		}else {
 			System.out.println("Bye!");
 		}
@@ -51,22 +51,22 @@ public class Lab10MoviesApp {
 				categories.add(temp.get(j));
 			}
 		}
-		chooseMovie(sc, moviesList, categories);
+		chooseCategory(sc, moviesList, categories);
 	}
 
 
 
-	private static void displayMovies(Scanner sc, List<Movie> moviesList, HashSet<String> categories, String answer) {
+	private static void displayMovies(Scanner sc, List<Movie> moviesList, HashSet<String> categories, String userResponse) {
 		HashSet<String> moviesByCategory = new HashSet<>();
 		for (int i = 0; i < moviesList.size(); i++) {
 			List<String> temp = moviesList.get(i).getCategory();
 			for (int j = 0; j < temp.size(); j++) {
-				if (temp.get(j).matches(answer)) {
+				if (temp.get(j).matches(userResponse)) {
 					moviesByCategory.add(moviesList.get(i).getTitle());
 				}
 			}
 		}
-		System.out.println(answer + " movies: ");
+		System.out.println(userResponse + " movies: ");
 		for (String movie : moviesByCategory) {
 		System.out.println(movie);
 		}
